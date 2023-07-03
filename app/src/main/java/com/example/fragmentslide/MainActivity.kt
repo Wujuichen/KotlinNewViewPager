@@ -2,32 +2,55 @@ package com.example.fragmentslide
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager2: ViewPager2
-    private lateinit var userList: ArrayList<String>
+    private lateinit var userList: ArrayList<User>
     private lateinit var adapter: MyPersonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        init()
+        setUpTransformer()
+    }
+
+    private fun setUpTransformer(){
+        val transformer = CompositePageTransformer()
+        transformer.addTransformer(MarginPageTransformer(20))
+        transformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = 0.8f + r * 0.2f
+        }
+        viewPager2.setPageTransformer(transformer)
+    }
+
+    private fun init(){
 
         viewPager2 = findViewById(R.id.viewPager2)
 
-        val person1 = User("Anne",  1, 12345678)
-        val person2 = User("Jason", 0, 20001125)
-        val person3 = User("Joyce", 1, 20010816)
+        val person1 = User("Anne",  "女", 12345678)
+        val person2 = User("Jason", "男", 20001125)
+        val person3 = User("Joyce", "女", 20010816)
 
         userList = ArrayList()
-        userList.add(person1.toString())
-        userList.add(person2.toString())
-        userList.add(person3.toString())
+        userList.add(person1)
+        userList.add(person2)
+        userList.add(person3)
 
-        adapter = MyPersonAdapter(userList,viewPager2)
+        adapter = MyPersonAdapter(userList)
+        adapter.submitList(userList)
         viewPager2.adapter = adapter
-
+        viewPager2.offscreenPageLimit = 1
+        viewPager2.clipToPadding = false
+        viewPager2.clipChildren = false
+        viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
     }
 }
 

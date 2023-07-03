@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-data class User(val name: String, val gender: Int, val birth: Long)
+data class User(val name: String, val gender: String, val birth: Long)
 
-class MyPersonAdapter(user: ArrayList<String>) : ListAdapter<User, UserViewHolder>(UserDiffCallback()) {
+class MyPersonAdapter(user: ArrayList<User>) : ListAdapter<User, UserViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
