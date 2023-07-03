@@ -3,12 +3,13 @@ package com.example.fragmentslide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-data class User(val name: String, val gender: String, val birth: Long)
+data class User(val name: String, val gender: String, val birth: Long, val imageView: Int)
 
 class MyPersonAdapter(user: ArrayList<User>) : ListAdapter<User, UserViewHolder>(UserDiffCallback()) {
 
@@ -26,11 +27,13 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
     private val genderTextView: TextView = itemView.findViewById(R.id.genderTextView)
     private val birthTextView: TextView = itemView.findViewById(R.id.birthTextView)
+    private val imageview: ImageView = itemView.findViewById(R.id.imageView)
 
     fun bind(user: User) {
         nameTextView.text = user.name
-        genderTextView.text = user.gender.toString()
+        genderTextView.text = user.gender
         birthTextView.text = user.birth.toString()
+        imageview.setImageResource(user.imageView)
     }
 }
 
