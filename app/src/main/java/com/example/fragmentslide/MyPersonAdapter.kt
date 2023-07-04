@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 data class User(val name: String, val gender: String, val birth: Long, val imageView: Int)
 
-class MyPersonAdapter(user: ArrayList<User>) : ListAdapter<User, UserViewHolder>(UserDiffCallback()) {
+class MyPersonAdapter() : ListAdapter<User, UserViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
