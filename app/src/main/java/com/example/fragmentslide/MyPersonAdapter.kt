@@ -15,7 +15,7 @@ class MyPersonAdapter(user: ArrayList<User>) : ListAdapter<User, UserViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
-        return UserViewHolder(view)
+        return UserViewHolder(view)  //返回UserViewHolder對象
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
@@ -41,9 +41,9 @@ class UserDiffCallback : DiffUtil.ItemCallback<User>() {
 
     override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
         return oldItem.name == newItem.name
-    //&& oldItem.gender == newItem.gender && oldItem.birth == newItem.birth
-    }
+    // oldItem.gender == newItem.gender && oldItem.birth == newItem.birth
     // areItemsThsSame 用來判斷兩個items 是否一樣。
+    }
 
     override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
         return oldItem == newItem
