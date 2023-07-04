@@ -10,27 +10,26 @@ import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewPager2: ViewPager2
-    private lateinit var adapter: MyPersonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewPager2 = findViewById(R.id.viewPager2)
         init(viewPager2)
+
         // 設置動畫效果
         setUpTransformer(20,0.8f)
         setViewPagerScroll(viewPager2)
     }
 
     private fun init(viewPager2: ViewPager2){
-        //initPersonList()
-        adapter = MyPersonAdapter(initPersonList() as ArrayList<User>) // 將 userList 作為MyPersonAdapter的參數傳遞給它
+        val adapter = MyPersonAdapter() // 將 userList 作為MyPersonAdapter的參數傳遞給它
         adapter.submitList(initPersonList()) // 呈現userList的所有資料
         viewPager2.adapter = adapter
     }
 
     private fun initPersonList() : List<User> {
-        val userList : MutableList<User> = ArrayList() // 創建一個新的list
+        val userList: MutableList<User> = mutableListOf() // 創建一個新的list
         val person1 = User("Anne", "女", 12345678, R.drawable.one)
         val person2 = User("Jason", "男", 20001125, R.drawable.two)
         val person3 = User("Joyce", "女", 20010816, R.drawable.three)
